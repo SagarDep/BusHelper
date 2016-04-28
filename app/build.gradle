@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.love_cookies.bushelper"
+        applicationId "com.android.bushelper"
         minSdkVersion 19
         targetSdkVersion 23
         versionCode 1

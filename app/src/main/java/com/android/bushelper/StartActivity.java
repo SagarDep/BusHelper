@@ -1,4 +1,4 @@
-package com.love_cookies.bushelper;
+package com.android.bushelper;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
