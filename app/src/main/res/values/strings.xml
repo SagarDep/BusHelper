@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">巴士助手</string>
 
+    <string name="city_text">当前所在城市：%s </string>
     <string name="bus_title">市内公交</string>
     <string name="coach_title">长途汽车</string>
+
+    <string name="search_hint">搜索</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.android.bushelper;
+package com.android.bushelper.activity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
+
+import com.android.bushelper.R;
 
 public class StartActivity extends AppCompatActivity {
 
