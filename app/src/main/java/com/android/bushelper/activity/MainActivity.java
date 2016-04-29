@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.bushelper.MyApplication;
 import com.android.bushelper.R;
@@ -81,5 +84,27 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             String cityStr = String. format(format , MyApplication.City) ;
             cityTV.setText(cityStr) ;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        CreateMenu(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Toast.makeText(this, "You clicked on Item 1", Toast.LENGTH_LONG).show();
+        return true;
+    }
+
+    private void CreateMenu(Menu menu)
+    {
+        MenuItem mnu1 = menu.add(0, 0, 0, "detail");
+        mnu1.setIcon(R.mipmap.icon_detail);
+        mnu1.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
     }
 }
