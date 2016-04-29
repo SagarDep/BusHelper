@@ -95,15 +95,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, MineActivity.class);
         startActivity(intent);
         return true;
     }
 
-    private void CreateMenu(Menu menu)
-    {
+    private void CreateMenu(Menu menu) {
         MenuItem mnu1 = menu.add(0, 0, 0, "detail");
         mnu1.setIcon(R.mipmap.icon_detail);
         mnu1.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
