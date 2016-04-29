@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.bushelper.MyApplication;
 import com.android.bushelper.R;
@@ -47,7 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         busBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, BusActivity.class);
+                startActivity(intent);
             }
         });
         busBtn.setOnTouchListener(this);
@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         coachBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, CoachActivity.class);
+                startActivity(intent);
             }
         });
         coachBtn.setOnTouchListener(this);
@@ -96,7 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        Toast.makeText(this, "You clicked on Item 1", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, MineActivity.class);
+        startActivity(intent);
         return true;
     }
 
