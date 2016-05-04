@@ -26,8 +26,8 @@ public class BusActivity extends AppCompatActivity {
 
         tabLayout = (TabLayout)findViewById(R.id.tab_layout);
         List<String> titles = new ArrayList<>();
-        titles.add("线路");
-        titles.add("站点");
+        titles.add(getResources().getString(R.string.line_title));
+        titles.add(getResources().getString(R.string.station_title));
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(0)));
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(1)));
 

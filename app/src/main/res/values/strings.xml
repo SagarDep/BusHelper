@@ -7,4 +7,13 @@
 
     <string name="search_hint">搜索</string>
 
+    <string name="line_title">线路</string>
+    <string name="station_title">站点</string>
+
+    <string name="line_hint">查询线路</string>
+    <string name="station_hint">查询站点</string>
+
+    <string name="from_hint">出发地</string>
+    <string name="to_hint">目的地</string>
+
 </resources>
