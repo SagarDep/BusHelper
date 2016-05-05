@@ -87,13 +87,17 @@ public class LineFragment extends Fragment {
     }
 
     public void initLineList(LineBean lineBean) {
-        List<LineBean.ResultEntity> parent = lineBean.getResult();
-        Map<String, List<LineBean.ResultEntity.StationdesEntity>> child = new HashMap<>();
-        for (LineBean.ResultEntity line : parent) {
-            child.put(line.getLine_id(), line.getStationdes());
+        if (lineBean.getResult() != null) {
+            List<LineBean.ResultEntity> parent = lineBean.getResult();
+            Map<String, List<LineBean.ResultEntity.StationdesEntity>> child = new HashMap<>();
+            for (LineBean.ResultEntity line : parent) {
+                child.put(line.getLine_id(), line.getStationdes());
+            }
+            LineAdapter lineAdapter = new LineAdapter(getActivity(), parent, child);
+            lineList.setAdapter(lineAdapter);
+        } else {
+            Toast.makeText(getActivity(), "未搜索到该线路", Toast.LENGTH_SHORT).show();
         }
-        LineAdapter lineAdapter = new LineAdapter(getActivity(), parent, child);
-        lineList.setAdapter(lineAdapter);
     }
 
 }
