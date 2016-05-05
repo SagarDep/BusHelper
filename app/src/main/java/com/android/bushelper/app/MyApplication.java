@@ -1,8 +1,9 @@
-package com.android.bushelper;
+package com.android.bushelper.app;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.bushelper.R;
 import com.android.bushelper.bean.UserBean;
 
 import org.xutils.x;

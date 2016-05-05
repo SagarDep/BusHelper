@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.bushelper.MyApplication;
+import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {

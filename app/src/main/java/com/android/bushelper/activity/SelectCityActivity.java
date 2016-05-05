@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.android.bushelper.MyApplication;
+import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.R;
 import com.android.bushelper.adapter.CityAdapter;
 import com.android.bushelper.bean.CityBean;

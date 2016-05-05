@@ -13,7 +13,8 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.android.bushelper.MyApplication;
+import com.android.bushelper.app.APIs;
+import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.R;
 import com.android.bushelper.adapter.LineAdapter;
 import com.android.bushelper.bean.LineBean;
@@ -56,8 +57,8 @@ public class LineFragment extends Fragment {
         if (TextUtils.isEmpty(lineStr)) {
             Toast.makeText(getActivity(), "请输入线路", Toast.LENGTH_SHORT).show();
         } else {
-            RequestParams requestParams = new RequestParams("http://op.juhe.cn/189/bus/busline");
-            requestParams.addQueryStringParameter("key", "46d4d4c80489aaf4d9ba264ec8627faa");
+            RequestParams requestParams = new RequestParams(APIs.LINE);
+            requestParams.addQueryStringParameter("key", APIs.BUS_KEY);
             requestParams.addQueryStringParameter("city", MyApplication.City);
             requestParams.addQueryStringParameter("bus", lineStr);
             x.http().get(requestParams, new Callback.CommonCallback<String>() {

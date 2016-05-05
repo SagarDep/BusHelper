@@ -13,7 +13,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.bushelper.MyApplication;
+import com.android.bushelper.app.APIs;
+import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.R;
 import com.android.bushelper.adapter.PlatformAdapter;
 import com.android.bushelper.bean.PlatformBean;
@@ -52,8 +53,8 @@ public class PlatformFragment extends Fragment {
         if (TextUtils.isEmpty(platformStr)) {
             Toast.makeText(getActivity(), "请输入站点", Toast.LENGTH_SHORT).show();
         } else {
-            RequestParams requestParams = new RequestParams("http://op.juhe.cn/189/bus/station");
-            requestParams.addQueryStringParameter("key", "46d4d4c80489aaf4d9ba264ec8627faa");
+            RequestParams requestParams = new RequestParams(APIs.PLATFORM);
+            requestParams.addQueryStringParameter("key", APIs.BUS_KEY);
             requestParams.addQueryStringParameter("city", MyApplication.City);
             requestParams.addQueryStringParameter("station", platformStr);
             x.http().get(requestParams, new Callback.CommonCallback<String>() {
