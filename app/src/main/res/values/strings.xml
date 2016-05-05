@@ -16,4 +16,7 @@
     <string name="from_hint">出发地</string>
     <string name="to_hint">目的地</string>
 
+    <string name="ticket_title">车票</string>
+    <string name="station_title">车站</string>
+
 </resources>

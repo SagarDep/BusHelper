@@ -7,7 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.bushelper.R;
-import com.android.bushelper.adapter.BusFragmentAdapter;
+import com.android.bushelper.adapter.FragmentAdapter;
 import com.android.bushelper.fragment.LineFragment;
 import com.android.bushelper.fragment.PlatformFragment;
 
@@ -35,7 +35,7 @@ public class BusActivity extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new LineFragment());
         fragments.add(new PlatformFragment());
-        BusFragmentAdapter adapter = new BusFragmentAdapter(getSupportFragmentManager(), fragments, titles);
+        FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabsFromPagerAdapter(adapter);
