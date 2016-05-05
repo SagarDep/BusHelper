@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp">
@@ -11,7 +12,7 @@
         android:padding="4dp"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:text="南京"/>
+        tools:text="南京"/>
 
     <TextView
         android:id="@+id/prov_tv"
@@ -21,7 +22,7 @@
         android:padding="4dp"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        android:text="江苏"/>
+        tools:text="江苏"/>
 
     <TextView
         android:id="@+id/cnty_tv"
@@ -32,6 +33,6 @@
         android:padding="4dp"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        android:text="中国"/>
+        tools:text="中国"/>
 
 </RelativeLayout>
