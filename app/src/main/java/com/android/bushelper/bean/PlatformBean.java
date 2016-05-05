@@ -2,7 +2,7 @@ package com.android.bushelper.bean;
 
 import java.util.List;
 
-public class StationBean {
+public class PlatformBean {
 
     /**
      * reason : success

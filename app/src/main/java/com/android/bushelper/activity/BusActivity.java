@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.android.bushelper.R;
 import com.android.bushelper.adapter.BusFragmentAdapter;
 import com.android.bushelper.fragment.LineFragment;
-import com.android.bushelper.fragment.StationFragment;
+import com.android.bushelper.fragment.PlatformFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +27,14 @@ public class BusActivity extends AppCompatActivity {
         tabLayout = (TabLayout)findViewById(R.id.tab_layout);
         List<String> titles = new ArrayList<>();
         titles.add(getResources().getString(R.string.line_title));
-        titles.add(getResources().getString(R.string.station_title));
+        titles.add(getResources().getString(R.string.platform_title));
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(0)));
         tabLayout.addTab(tabLayout.newTab().setText(titles.get(1)));
 
         viewPager = (ViewPager)findViewById(R.id.view_pager);
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new LineFragment());
-        fragments.add(new StationFragment());
+        fragments.add(new PlatformFragment());
         BusFragmentAdapter adapter = new BusFragmentAdapter(getSupportFragmentManager(), fragments, titles);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);

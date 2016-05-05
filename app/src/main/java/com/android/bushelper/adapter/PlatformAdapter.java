@@ -8,14 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.bushelper.R;
-import com.android.bushelper.bean.StationBean;
+import com.android.bushelper.bean.PlatformBean;
 
-public class StationAdapter extends BaseAdapter {
+public class PlatformAdapter extends BaseAdapter {
 
     private Context context;
-    private StationBean datas;
+    private PlatformBean datas;
 
-    public StationAdapter(Context context, StationBean datas) {
+    public PlatformAdapter(Context context, PlatformBean datas) {
         this.context = context;
         this.datas = datas;
     }
@@ -40,19 +40,19 @@ public class StationAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_station_list, parent, false);
-            viewHolder.station_text = (TextView)convertView.findViewById(R.id.station_text);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_platform_list, parent, false);
+            viewHolder.platform_text = (TextView)convertView.findViewById(R.id.platform_text);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        viewHolder.station_text.setText(datas.getResult().get(position).getName());
+        viewHolder.platform_text.setText(datas.getResult().get(position).getName());
 
         return convertView;
     }
 
     public class ViewHolder {
-        private TextView station_text;
+        private TextView platform_text;
     }
 }

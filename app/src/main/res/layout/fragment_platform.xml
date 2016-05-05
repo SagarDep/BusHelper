@@ -16,16 +16,16 @@
         android:padding="10dp">
 
         <EditText
-            android:id="@+id/station_search_et"
+            android:id="@+id/platform_search_et"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/station_hint"
+            android:hint="@string/platform_hint"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
         <Button
-            android:id="@+id/station_search_btn"
+            android:id="@+id/platform_search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -35,7 +35,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/station_list"
+        android:id="@+id/platform_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

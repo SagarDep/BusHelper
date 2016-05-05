@@ -15,53 +15,53 @@ import android.widget.Toast;
 
 import com.android.bushelper.MyApplication;
 import com.android.bushelper.R;
-import com.android.bushelper.adapter.StationAdapter;
-import com.android.bushelper.bean.StationBean;
+import com.android.bushelper.adapter.PlatformAdapter;
+import com.android.bushelper.bean.PlatformBean;
 import com.google.gson.Gson;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
-public class StationFragment extends Fragment {
+public class PlatformFragment extends Fragment {
 
-    private EditText stationSearchET;
-    private Button stationSearchBtn;
-    private ListView stationList;
+    private EditText platformSearchET;
+    private Button platformSearchBtn;
+    private ListView platformList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_station, container, false);
-        stationSearchET = (EditText)root.findViewById(R.id.station_search_et);
-        stationSearchBtn = (Button)root.findViewById(R.id.station_search_btn);
-        stationList = (ListView)root.findViewById(R.id.station_list);
-        stationSearchBtn.setOnClickListener(new View.OnClickListener() {
+        View root = inflater.inflate(R.layout.fragment_platform, container, false);
+        platformSearchET = (EditText)root.findViewById(R.id.platform_search_et);
+        platformSearchBtn = (Button)root.findViewById(R.id.platform_search_btn);
+        platformList = (ListView)root.findViewById(R.id.platform_list);
+        platformSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchStation();
+                searchPlatform();
             }
         });
         return root;
     }
 
-    public void searchStation() {
+    public void searchPlatform() {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(stationSearchET.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(platformSearchET.getWindowToken(), 0);
 
-        String stationStr = stationSearchET.getText().toString();
-        if (TextUtils.isEmpty(stationStr)) {
+        String platformStr = platformSearchET.getText().toString();
+        if (TextUtils.isEmpty(platformStr)) {
             Toast.makeText(getActivity(), "请输入站点", Toast.LENGTH_SHORT).show();
         } else {
             RequestParams requestParams = new RequestParams("http://op.juhe.cn/189/bus/station");
             requestParams.addQueryStringParameter("key", "46d4d4c80489aaf4d9ba264ec8627faa");
             requestParams.addQueryStringParameter("city", MyApplication.City);
-            requestParams.addQueryStringParameter("station", stationStr);
+            requestParams.addQueryStringParameter("station", platformStr);
             x.http().get(requestParams, new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
                     Gson gson = new Gson();
-                    StationBean stationBean = gson.fromJson(result, StationBean.class);
-                    initStationList(stationBean);
+                    PlatformBean platformBean = gson.fromJson(result, PlatformBean.class);
+                    initPlatformList(platformBean);
                 }
 
                 @Override
@@ -82,10 +82,10 @@ public class StationFragment extends Fragment {
         }
     }
 
-    public void initStationList(StationBean stationBean) {
-        if (stationBean.getResult() != null) {
-            StationAdapter stationAdapter = new StationAdapter(getActivity(), stationBean);
-            stationList.setAdapter(stationAdapter);
+    public void initPlatformList(PlatformBean platformBean) {
+        if (platformBean.getResult() != null) {
+            PlatformAdapter platformAdapter = new PlatformAdapter(getActivity(), platformBean);
+            platformList.setAdapter(platformAdapter);
         } else {
             Toast.makeText(getActivity(), "未搜索到该站点", Toast.LENGTH_SHORT).show();
         }
