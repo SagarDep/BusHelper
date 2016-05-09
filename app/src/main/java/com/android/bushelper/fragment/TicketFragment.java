@@ -1,6 +1,7 @@
 package com.android.bushelper.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -8,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.bushelper.R;
+import com.android.bushelper.activity.TicketDetailActivity;
 import com.android.bushelper.adapter.TicketAdapter;
 import com.android.bushelper.app.APIs;
 import com.android.bushelper.bean.TicketBean;
@@ -88,10 +91,20 @@ public class TicketFragment extends Fragment {
         }
     }
 
-    public void initTicketList(TicketBean ticketBean) {
+    public void initTicketList(final TicketBean ticketBean) {
         if (ticketBean.getResult() != null) {
             TicketAdapter ticketAdapter = new TicketAdapter(getActivity(), ticketBean);
             ticketList.setAdapter(ticketAdapter);
+            ticketList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getActivity(), TicketDetailActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("ticket", ticketBean.getResult().getList().get(position));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+            });
         } else {
             Toast.makeText(getActivity(), "没有查到相关票务", Toast.LENGTH_SHORT).show();
         }

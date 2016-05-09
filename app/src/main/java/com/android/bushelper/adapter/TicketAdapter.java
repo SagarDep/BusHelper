@@ -52,8 +52,8 @@ public class TicketAdapter extends BaseAdapter {
 
         viewHolder.from_text.setText(datas.getResult().getList().get(position).getStart());
         viewHolder.to_text.setText(datas.getResult().getList().get(position).getArrive());
-        viewHolder.date_text.setText(datas.getResult().getList().get(position).getDate());
-        viewHolder.price_text.setText(datas.getResult().getList().get(position).getPrice());
+        viewHolder.date_text.setText(datas.getResult().getList().get(position).getDate() + "　发车");
+        viewHolder.price_text.setText("票价　" + datas.getResult().getList().get(position).getPrice());
 
         return convertView;
     }

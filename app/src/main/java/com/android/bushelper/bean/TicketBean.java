@@ -1,5 +1,8 @@
 package com.android.bushelper.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class TicketBean {
@@ -56,7 +59,7 @@ public class TicketBean {
             this.list = list;
         }
 
-        public static class ListEntity {
+        public static class ListEntity implements Parcelable {
             private String start;
             private String arrive;
             private String date;
@@ -93,6 +96,41 @@ public class TicketBean {
             public void setPrice(String price) {
                 this.price = price;
             }
+
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(this.start);
+                dest.writeString(this.arrive);
+                dest.writeString(this.date);
+                dest.writeString(this.price);
+            }
+
+            public ListEntity() {
+            }
+
+            protected ListEntity(Parcel in) {
+                this.start = in.readString();
+                this.arrive = in.readString();
+                this.date = in.readString();
+                this.price = in.readString();
+            }
+
+            public static final Parcelable.Creator<ListEntity> CREATOR = new Parcelable.Creator<ListEntity>() {
+                @Override
+                public ListEntity createFromParcel(Parcel source) {
+                    return new ListEntity(source);
+                }
+
+                @Override
+                public ListEntity[] newArray(int size) {
+                    return new ListEntity[size];
+                }
+            };
         }
     }
 }
