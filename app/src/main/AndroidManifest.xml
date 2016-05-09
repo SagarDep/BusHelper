@@ -28,7 +28,8 @@
         <activity android:name=".activity.MineActivity" />
         <activity android:name=".activity.BusActivity" />
         <activity android:name=".activity.CoachActivity" />
-        <activity android:name=".activity.TicketDetailActivity"></activity>
+        <activity android:name=".activity.TicketDetailActivity" />
+        <activity android:name=".activity.OutTicketActivity"></activity>
     </application>
 
 </manifest>

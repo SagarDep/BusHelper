@@ -37,4 +37,12 @@
     <string name="re_password_error">两次输入的密码不一致</string>
     <string name="register_success">注册成功</string>
 
+    <string name="buy_btn_text">购买</string>
+    <string name="buy_success">购买成功</string>
+    <string name="info_hint">车　次:</string>
+    <string name="start_date_hint">发　车:</string>
+    <string name="order_num_hint">订单号:</string>
+    <string name="money_hint">金　额:</string>
+    <string name="date_hint">时　间:</string>
+
 </resources>
