@@ -2,7 +2,7 @@ package com.android.bushelper.bean;
 
 public class UserBean {
     private int user_id;
-    private String username;
+    private String account;
     private String nickname;
     private String password;
 
@@ -30,11 +30,11 @@ public class UserBean {
         this.user_id = user_id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccount(String account) {
+        this.account = account;
     }
 }
