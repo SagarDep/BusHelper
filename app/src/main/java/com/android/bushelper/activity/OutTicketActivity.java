@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.bushelper.R;
 import com.android.bushelper.bean.TicketBean;
@@ -76,5 +77,21 @@ public class OutTicketActivity extends AppCompatActivity {
         anim.setDuration(1000);
         anim.setFillAfter(true);
         payInfoRL.startAnimation(anim);
+        anim.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Toast.makeText(OutTicketActivity.this, R.string.order_tip, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 }

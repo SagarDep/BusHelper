@@ -44,5 +44,6 @@
     <string name="order_num_hint">订单号:</string>
     <string name="money_hint">金　额:</string>
     <string name="date_hint">时　间:</string>
+    <string name="order_tip">可到我的订单查看</string>
 
 </resources>
