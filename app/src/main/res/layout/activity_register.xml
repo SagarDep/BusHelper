@@ -1,8 +1,58 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_mid">
+    android:background="@color/grey_mid"
+    android:orientation="vertical">
 
-</RelativeLayout>
+    <EditText
+        android:id="@+id/user_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/user_account_hint"
+        android:maxLength="16"
+        android:textSize="16sp"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/user_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/user_nickname_hint"
+        android:maxLength="16"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/user_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/user_password_hint"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/user_re_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="@string/user_re_password_hint"
+        android:inputType="textPassword"
+        android:maxLength="16"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/register_btn_text"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+</LinearLayout>
