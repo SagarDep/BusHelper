@@ -1,6 +1,7 @@
 package com.android.bushelper.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -46,6 +47,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         myDatabaseHelper = new MyDatabaseHelper(this, "bus_helper.db", null, 1);
+        SharedPreferences pref = getSharedPreferences("data", MODE_PRIVATE);
+        String account = pref.getString("account", "");
+        if (!TextUtils.isEmpty(account)) {
+            accountET.setText(pref.getString("account", ""));
+            passwordET.setText(pref.getString("password", ""));
+            userLogin();
+        }
     }
 
     public void userLogin() {
@@ -65,7 +73,9 @@ public class LoginActivity extends AppCompatActivity {
                     userBean.setUser_id(cursor.getInt(cursor.getColumnIndex("user_id")));
                     userBean.setAccount(cursor.getString(cursor.getColumnIndex("account")));
                     userBean.setNickname(cursor.getString(cursor.getColumnIndex("nickname")));
+                    userBean.setPassword(cursor.getString(cursor.getColumnIndex("password")));
                     MyApplication.setUser(userBean);
+                    saveUserCache(userBean);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -77,5 +87,12 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void saveUserCache(UserBean userBean) {
+        SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+        editor.putString("account", userBean.getAccount());
+        editor.putString("password", userBean.getPassword());
+        editor.commit();
     }
 }
