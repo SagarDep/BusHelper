@@ -46,7 +46,7 @@ public class TicketDetailActivity extends AppCompatActivity {
 
     public void buyTicket() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("提示");
+        builder.setTitle("支付提示");
         builder.setMessage("确定支付" + ticket.getPrice() + "购买车票？");
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override

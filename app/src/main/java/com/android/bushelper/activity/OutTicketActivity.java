@@ -1,5 +1,7 @@
 package com.android.bushelper.activity;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -11,7 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.bean.TicketBean;
+import com.android.bushelper.db.MyDatabaseHelper;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class OutTicketActivity extends AppCompatActivity {
 
@@ -23,6 +30,9 @@ public class OutTicketActivity extends AppCompatActivity {
     private TextView orderBumTV;
     private TextView moneyTV;
     private TextView dateTV;
+
+    private MyDatabaseHelper myDatabaseHelper;
+    private String orderTime;
 
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -42,17 +52,25 @@ public class OutTicketActivity extends AppCompatActivity {
         setContentView(R.layout.activity_out_ticket);
         Bundle bundle = getIntent().getExtras();
         TicketBean.ResultEntity.ListEntity ticket = bundle.getParcelable("ticket");
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        long timestamp = System.currentTimeMillis();
+        Date curDate = new Date(timestamp);
+        orderTime = formatter.format(curDate);
+
+        saveOrder(ticket);
+
         payInfoRL = (RelativeLayout) findViewById(R.id.rl_payInfo);
-        infoTV = (TextView)findViewById(R.id.info_tv);
+        infoTV = (TextView) findViewById(R.id.info_tv);
         infoTV.setText(ticket.getStart() + " -- " + ticket.getArrive());
-        startDateTV = (TextView)findViewById(R.id.start_date_tv);
+        startDateTV = (TextView) findViewById(R.id.start_date_tv);
         startDateTV.setText(ticket.getDate());
-        orderBumTV = (TextView)findViewById(R.id.order_num_tv);
-        orderBumTV.setText("123123321321");
-        moneyTV = (TextView)findViewById(R.id.money_tv);
+        orderBumTV = (TextView) findViewById(R.id.order_num_tv);
+        orderBumTV.setText(timestamp + "");
+        moneyTV = (TextView) findViewById(R.id.money_tv);
         moneyTV.setText(ticket.getPrice());
-        dateTV = (TextView)findViewById(R.id.date_tv);
-        dateTV.setText("2016-05-09");
+        dateTV = (TextView) findViewById(R.id.date_tv);
+        dateTV.setText(orderTime);
         newThread();
     }
 
@@ -93,5 +111,21 @@ public class OutTicketActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void saveOrder(TicketBean.ResultEntity.ListEntity ticket) {
+        SQLiteDatabase db = myDatabaseHelper.getWritableDatabase();
+        try {
+            ContentValues values = new ContentValues();
+            values.put("user_id", MyApplication.user.getUser_id());
+            values.put("order_time", orderTime);
+            values.put("start", ticket.getStart());
+            values.put("arrive", ticket.getArrive());
+            values.put("date", ticket.getDate());
+            values.put("price", ticket.getPrice());
+            db.insert("orders", null, values);
+        } catch (Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
