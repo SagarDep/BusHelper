@@ -46,4 +46,8 @@
     <string name="date_hint">时　间:</string>
     <string name="order_tip">可到我的订单查看</string>
 
+    <string name="my_order_text">我的订单</string>
+    <string name="reset_password_text">修改密码</string>
+    <string name="logout_btn_text">注销登录</string>
+
 </resources>
