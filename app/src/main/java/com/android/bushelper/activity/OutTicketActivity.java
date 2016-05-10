@@ -50,6 +50,9 @@ public class OutTicketActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_out_ticket);
+
+        myDatabaseHelper = new MyDatabaseHelper(this, "bus_helper.db", null, 1);
+
         Bundle bundle = getIntent().getExtras();
         TicketBean.ResultEntity.ListEntity ticket = bundle.getParcelable("ticket");
 
