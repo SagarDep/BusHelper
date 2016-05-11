@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.bushelper.R;
 import com.android.bushelper.app.Activitys;
 import com.android.bushelper.app.MyApplication;
-import com.android.bushelper.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private TextView cityTV;
     private CardView busBtn;
     private CardView coachBtn;
+
+    private long exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,5 +118,27 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onDestroy() {
         super.onDestroy();
         Activitys.removeActivity(this);
+    }
+
+    /**
+     * 点两次返回退出程序
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exit) > 2000)
+            {
+                Toast.makeText(this, R.string.exit_tip, Toast.LENGTH_SHORT).show();
+                exit = System.currentTimeMillis();
+            } else {
+                Activitys.finishAll();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

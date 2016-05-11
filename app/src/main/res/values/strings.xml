@@ -57,5 +57,7 @@
 
     <string name="submit_btn_text">确定</string>
 
+    <string name="exit_tip">再按一次退出程序</string>
+
 
 </resources>

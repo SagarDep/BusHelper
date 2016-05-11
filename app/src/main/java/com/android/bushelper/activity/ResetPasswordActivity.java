@@ -61,10 +61,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
                     editor.putString("password", newPwd);
                     editor.commit();
-                    Toast.makeText(this, getResources().getString(R.string.reset_password_success), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.reset_password_success, Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(this, getResources().getString(R.string.old_password_error), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.old_password_error, Toast.LENGTH_SHORT).show();
                 }
                 cursor.close();
             } catch (Exception ex) {
