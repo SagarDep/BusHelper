@@ -121,11 +121,11 @@ public class PullView extends LinearLayout {
 	/**
 	 * footer refresh listener
 	 */
-	private OnFooterRefreshListener mOnFooterRefreshListener;
+	private OnPullLoadListener mOnPullLoadListener;
 	/**
 	 * footer refresh listener
 	 */
-	private OnHeaderRefreshListener mOnHeaderRefreshListener;
+	private OnPullRefreshListener mOnPullRefreshListener;
 	/**
 	 * last update time
 	 */
@@ -324,7 +324,7 @@ public class PullView extends LinearLayout {
 			if (mPullState == PULL_DOWN_STATE) {
 				if (topMargin >= 0) {
 					// 开始刷新
-					headerRefreshing();
+					pullRefreshing();
 				} else {
 					// 还没有执行刷新，重新隐藏
 					setHeaderTopMargin(-mHeaderViewHeight);
@@ -332,8 +332,8 @@ public class PullView extends LinearLayout {
 			} else if (mPullState == PULL_UP_STATE) {
 				if (Math.abs(topMargin) >= mHeaderViewHeight
 						+ mFooterViewHeight) {
-					// 开始执行footer 刷新
-					footerRefreshing();
+					// 开始执行加载
+					pullLoading();
 				} else {
 					// 还没有执行刷新，重新隐藏
 					setHeaderTopMargin(-mHeaderViewHeight);
@@ -491,7 +491,7 @@ public class PullView extends LinearLayout {
 	 * 
 	 * @description hylin 2012-7-31上午9:10:12
 	 */
-	private void headerRefreshing() {
+	private void pullRefreshing() {
 		mHeaderState = REFRESHING;
 		setHeaderTopMargin(0);
 		mHeaderImageView.setVisibility(View.GONE);
@@ -499,8 +499,8 @@ public class PullView extends LinearLayout {
 		mHeaderImageView.setImageDrawable(null);
 		mHeaderProgressBar.setVisibility(View.VISIBLE);
 		mHeaderTextView.setText("刷新...");
-		if (mOnHeaderRefreshListener != null) {
-			mOnHeaderRefreshListener.onHeaderRefresh(this);
+		if (mOnPullRefreshListener != null) {
+			mOnPullRefreshListener.onPullRefresh(this);
 		}
 	}
 
@@ -509,7 +509,7 @@ public class PullView extends LinearLayout {
 	 * 
 	 * @description hylin 2012-7-31上午9:09:59
 	 */
-	private void footerRefreshing() {
+	private void pullLoading() {
 		mFooterState = REFRESHING;
 		int top = mHeaderViewHeight + mFooterViewHeight;
 		setHeaderTopMargin(-top);
@@ -519,8 +519,8 @@ public class PullView extends LinearLayout {
 		mFooterProgressBar.setVisibility(View.VISIBLE);
 		mFooterTextView
 				.setText("加载中...");
-		if (mOnFooterRefreshListener != null) {
-			mOnFooterRefreshListener.onFooterRefresh(this);
+		if (mOnPullLoadListener != null) {
+			mOnPullLoadListener.onPullLoad(this);
 		}
 	}
 
@@ -544,7 +544,7 @@ public class PullView extends LinearLayout {
 	 * 
 	 * @description hylin 2012-7-31上午11:54:23
 	 */
-	public void onHeaderRefreshComplete() {
+	public void onPullRefreshComplete() {
 		setHeaderTopMargin(-mHeaderViewHeight);
 		mHeaderImageView.setVisibility(View.VISIBLE);
 		mHeaderImageView.setImageResource(R.mipmap.icon_arrow_down);
@@ -556,7 +556,7 @@ public class PullView extends LinearLayout {
 	/**
 	 * footer view 完成更新后恢复初始状态
 	 */
-	public void onFooterRefreshComplete() {
+	public void onPullLoadComplete() {
 		setHeaderTopMargin(-mHeaderViewHeight);
 		mFooterImageView.setVisibility(View.VISIBLE);
 		mFooterImageView.setImageResource(R.mipmap.icon_arrow_up);
@@ -576,55 +576,37 @@ public class PullView extends LinearLayout {
 		return params.topMargin;
 	}
 
-//	/**
-//	 * lock
-//	 * 
-//	 * @description hylin 2012-7-27下午6:52:25
-//	 */
-//	private void lock() {
-//		mLock = true;
-//	}
-//
-//	/**
-//	 * unlock
-//	 * 
-//	 * @description hylin 2012-7-27下午6:53:18
-//	 */
-//	private void unlock() {
-//		mLock = false;
-//	}
-
 	/**
 	 * set headerRefreshListener
 	 * 
 	 * @description
-	 * @param headerRefreshListener
+	 * @param pullRefreshListener
 	 *            hylin 2012-7-31上午11:43:58
 	 */
 	public void setOnHeaderRefreshListener(
-			OnHeaderRefreshListener headerRefreshListener) {
-		mOnHeaderRefreshListener = headerRefreshListener;
+			OnPullRefreshListener pullRefreshListener) {
+		mOnPullRefreshListener = pullRefreshListener;
 	}
 
 	public void setOnFooterRefreshListener(
-			OnFooterRefreshListener footerRefreshListener) {
-		mOnFooterRefreshListener = footerRefreshListener;
+			OnPullLoadListener footerRefreshListener) {
+		mOnPullLoadListener = footerRefreshListener;
 	}
 
 	/**
 	 * Interface definition for a callback to be invoked when list/grid header
 	 * view should be refreshed.
 	 */
-	public interface OnHeaderRefreshListener {
-		public void onHeaderRefresh(PullView view);
+	public interface OnPullRefreshListener {
+		public void onPullRefresh(PullView view);
 	}
 
 	/**
 	 * Interface definition for a callback to be invoked when list/grid footer
 	 * view should be refreshed.
 	 */
-	public interface OnFooterRefreshListener {
-		public void onFooterRefresh(PullView view);
+	public interface OnPullLoadListener {
+		public void onPullLoad(PullView view);
 	}
 
 }
