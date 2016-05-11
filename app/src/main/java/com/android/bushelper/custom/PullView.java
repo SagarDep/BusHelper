@@ -583,12 +583,12 @@ public class PullView extends LinearLayout {
 	 * @param pullRefreshListener
 	 *            hylin 2012-7-31上午11:43:58
 	 */
-	public void setOnHeaderRefreshListener(
+	public void setOnPullRefreshListener(
 			OnPullRefreshListener pullRefreshListener) {
 		mOnPullRefreshListener = pullRefreshListener;
 	}
 
-	public void setOnFooterRefreshListener(
+	public void setOnPullLoadListener(
 			OnPullLoadListener footerRefreshListener) {
 		mOnPullLoadListener = footerRefreshListener;
 	}
