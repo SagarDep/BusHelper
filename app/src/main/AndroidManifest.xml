@@ -30,7 +30,8 @@
         <activity android:name=".activity.CoachActivity" />
         <activity android:name=".activity.TicketDetailActivity" />
         <activity android:name=".activity.OutTicketActivity" />
-        <activity android:name=".activity.OrderActivity"></activity>
+        <activity android:name=".activity.OrderActivity" />
+        <activity android:name=".activity.ResetPasswordActivity" />
     </application>
 
 </manifest>

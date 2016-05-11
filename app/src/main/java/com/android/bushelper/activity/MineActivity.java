@@ -36,7 +36,8 @@ public class MineActivity extends AppCompatActivity {
         resetPasswordLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MineActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
             }
         });
         logoutBtn = (Button)findViewById(R.id.logout_btn);
