@@ -15,6 +15,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String CREATE_ORDER = "create table orders ("
             + "order_id integer primary key autoincrement,"
             + "user_id integer,"
+            + "order_no text,"
             + "order_time text,"
             + "start text,"
             + "arrive text,"

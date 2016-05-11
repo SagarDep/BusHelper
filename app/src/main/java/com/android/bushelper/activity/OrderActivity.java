@@ -3,8 +3,6 @@ package com.android.bushelper.activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,18 +27,6 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
 
     private int offset = 0;
 
-    private Handler handler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            switch (msg.what) {
-                case 1:
-                    initOrderList(orderDatas);
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +36,7 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
         pullView.setOnPullRefreshListener(this);
         pullView.setOnPullLoadListener(this);
         orderList = (ListView)findViewById(R.id.order_list);
+        initOrderList();
         getOrder(offset);
     }
 
@@ -59,12 +46,13 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
         }
         SQLiteDatabase db = myDatabaseHelper.getWritableDatabase();
         try {
-            String sql = "SELECT * FROM orders WHERE user_id = ? LIMIT 10 OFFSET " + (offset * 10);
+            String sql = "SELECT * FROM orders WHERE user_id = ? ORDER BY order_no DESC LIMIT 10 OFFSET " + (offset * 10);
             Cursor cursor = db.rawQuery(sql, new String[]{MyApplication.user.getUser_id() + ""});
-            if(cursor.moveToFirst()){
+            while (cursor.moveToNext()) {
                 OrderBean orderBean = new OrderBean();
                 orderBean.setOrder_id(cursor.getInt(cursor.getColumnIndex("order_id")));
                 orderBean.setUser_id(cursor.getInt(cursor.getColumnIndex("user_id")));
+                orderBean.setOrder_no(cursor.getString(cursor.getColumnIndex("order_no")));
                 orderBean.setOrder_time(cursor.getString(cursor.getColumnIndex("order_time")));
                 orderBean.setStart(cursor.getString(cursor.getColumnIndex("start")));
                 orderBean.setArrive(cursor.getString(cursor.getColumnIndex("arrive")));
@@ -73,17 +61,15 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
                 orderDatas.add(orderBean);
             }
             cursor.close();
-            newThread();
+            pullComplete();
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void initOrderList(List<OrderBean> orderDatas) {
+    public void initOrderList() {
         orderAdapter = new OrderAdapter(this, orderDatas);
         orderList.setAdapter(orderAdapter);
-        pullView.onPullRefreshComplete();
-        pullView.onPullLoadComplete();
     }
 
     @Override
@@ -97,19 +83,9 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
         getOrder(offset);
     }
 
-    private void newThread() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Message msg = new Message();
-                msg.what = 1;
-                handler.sendMessage(msg);
-            }
-        }).start();
+    public void pullComplete() {
+        orderAdapter.notifyDataSetChanged();
+        pullView.onPullRefreshComplete();
+        pullView.onPullLoadComplete();
     }
 }

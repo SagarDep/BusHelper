@@ -33,6 +33,7 @@ public class OutTicketActivity extends AppCompatActivity {
 
     private MyDatabaseHelper myDatabaseHelper;
     private String orderTime;
+    private String orderNo;
 
     private Handler handler = new Handler() {
         public void handleMessage(android.os.Message msg) {
@@ -60,6 +61,7 @@ public class OutTicketActivity extends AppCompatActivity {
         long timestamp = System.currentTimeMillis();
         Date curDate = new Date(timestamp);
         orderTime = formatter.format(curDate);
+        orderNo = timestamp + "";
 
         saveOrder(ticket);
 
@@ -121,6 +123,7 @@ public class OutTicketActivity extends AppCompatActivity {
         try {
             ContentValues values = new ContentValues();
             values.put("user_id", MyApplication.user.getUser_id());
+            values.put("order_no", orderNo);
             values.put("order_time", orderTime);
             values.put("start", ticket.getStart());
             values.put("arrive", ticket.getArrive());

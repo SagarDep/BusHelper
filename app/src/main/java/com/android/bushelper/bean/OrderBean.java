@@ -3,6 +3,7 @@ package com.android.bushelper.bean;
 public class OrderBean {
     private int order_id;
     private int user_id;
+    private String order_no;
     private String order_time;
     private String start;
     private String arrive;
@@ -63,5 +64,13 @@ public class OrderBean {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public String getOrder_no() {
+        return order_no;
+    }
+
+    public void setOrder_no(String order_no) {
+        this.order_no = order_no;
     }
 }
