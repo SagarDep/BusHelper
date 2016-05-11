@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.Activitys;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -35,6 +36,8 @@ public class StartActivity extends AppCompatActivity {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(rootView, "alpha", 0f, 1f);
         objectAnimator.setDuration(1000);
         objectAnimator.start();
+
+        Activitys.addActivity(this);
     }
 
     @Override
@@ -45,4 +48,9 @@ public class StartActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
+    }
 }

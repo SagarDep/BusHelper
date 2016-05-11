@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.R;
 import com.android.bushelper.adapter.CityAdapter;
@@ -52,6 +53,8 @@ public class SelectCityActivity extends AppCompatActivity {
 
             }
         });
+
+        Activitys.addActivity(this);
     }
 
     public void getCity() {
@@ -102,5 +105,11 @@ public class SelectCityActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.db.MyDatabaseHelper;
 
@@ -37,6 +38,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 resetPassword();
             }
         });
+
+        Activitys.addActivity(this);
     }
 
     public void resetPassword() {
@@ -68,5 +71,11 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

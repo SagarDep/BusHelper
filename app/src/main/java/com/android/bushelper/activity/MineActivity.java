@@ -1,6 +1,7 @@
 package com.android.bushelper.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.app.MyApplication;
 
 public class MineActivity extends AppCompatActivity {
@@ -44,8 +46,22 @@ public class MineActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                editor.putString("account", "");
+                editor.putString("password", "");
+                editor.commit();
+                Intent intent = new Intent(MineActivity.this, LoginActivity.class);
+                startActivity(intent);
+                Activitys.finishAll();
             }
         });
+
+        Activitys.addActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

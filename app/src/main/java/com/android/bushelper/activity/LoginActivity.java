@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.bean.UserBean;
 import com.android.bushelper.db.MyDatabaseHelper;
@@ -54,6 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             passwordET.setText(pref.getString("password", ""));
             userLogin();
         }
+
+        Activitys.addActivity(this);
     }
 
     public void userLogin() {
@@ -94,5 +97,11 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("account", userBean.getAccount());
         editor.putString("password", userBean.getPassword());
         editor.commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

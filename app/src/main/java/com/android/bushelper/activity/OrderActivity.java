@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.android.bushelper.R;
 import com.android.bushelper.adapter.OrderAdapter;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.bean.OrderBean;
 import com.android.bushelper.custom.PullView;
@@ -38,6 +39,8 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
         orderList = (ListView)findViewById(R.id.order_list);
         initOrderList();
         getOrder(offset);
+
+        Activitys.addActivity(this);
     }
 
     public void getOrder(int offset) {
@@ -87,5 +90,11 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
         orderAdapter.notifyDataSetChanged();
         pullView.onPullRefreshComplete();
         pullView.onPullLoadComplete();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.android.bushelper.R;
 import com.android.bushelper.adapter.FragmentAdapter;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.fragment.LineFragment;
 import com.android.bushelper.fragment.PlatformFragment;
 
@@ -39,5 +40,13 @@ public class BusActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabsFromPagerAdapter(adapter);
+
+        Activitys.addActivity(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

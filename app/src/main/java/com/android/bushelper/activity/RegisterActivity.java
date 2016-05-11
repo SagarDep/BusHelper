@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.db.MyDatabaseHelper;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -39,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         myDatabaseHelper = new MyDatabaseHelper(this, "bus_helper.db", null, 1);
+
+        Activitys.addActivity(this);
     }
 
     public void userRegister() {
@@ -79,5 +82,11 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

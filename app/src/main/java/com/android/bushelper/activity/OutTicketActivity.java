@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.app.MyApplication;
 import com.android.bushelper.bean.TicketBean;
 import com.android.bushelper.db.MyDatabaseHelper;
@@ -77,6 +78,8 @@ public class OutTicketActivity extends AppCompatActivity {
         dateTV = (TextView) findViewById(R.id.date_tv);
         dateTV.setText(orderTime);
         newThread();
+
+        Activitys.addActivity(this);
     }
 
     private void newThread() {
@@ -133,5 +136,11 @@ public class OutTicketActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }

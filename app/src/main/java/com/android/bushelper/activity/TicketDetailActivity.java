@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.bushelper.R;
+import com.android.bushelper.app.Activitys;
 import com.android.bushelper.bean.TicketBean;
 
 public class TicketDetailActivity extends AppCompatActivity {
@@ -42,6 +43,8 @@ public class TicketDetailActivity extends AppCompatActivity {
                 buyTicket();
             }
         });
+
+        Activitys.addActivity(this);
     }
 
     public void buyTicket() {
@@ -67,5 +70,11 @@ public class TicketDetailActivity extends AppCompatActivity {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Activitys.removeActivity(this);
     }
 }
