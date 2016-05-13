@@ -1,5 +1,6 @@
 package com.android.bushelper.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,6 +33,10 @@ public class StationFragment extends Fragment {
     }
 
     private void getStation() {
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         RequestParams requestParams = new RequestParams(APIs.STATION);
         requestParams.addQueryStringParameter("key", APIs.COACH_KEY);
         requestParams.addQueryStringParameter("station", MyApplication.City);
@@ -41,21 +46,23 @@ public class StationFragment extends Fragment {
                 Gson gson = new Gson();
                 StationBean stationBean = gson.fromJson(result, StationBean.class);
                 initStationList(stationBean);
+                progressDialog.dismiss();
             }
 
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
-
+                Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(CancelledException cex) {
-
+                progressDialog.dismiss();
             }
 
             @Override
             public void onFinished() {
-
+                progressDialog.dismiss();
             }
         });
     }

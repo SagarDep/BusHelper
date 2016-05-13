@@ -1,5 +1,6 @@
 package com.android.bushelper.activity;
 
+import android.app.ProgressDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -44,6 +45,10 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
     }
 
     public void getOrder(int offset) {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         if (offset == 0) {
             orderDatas.clear();
         }
@@ -65,8 +70,10 @@ public class OrderActivity extends AppCompatActivity implements PullView.OnPullR
             }
             cursor.close();
             pullComplete();
+            progressDialog.dismiss();
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            progressDialog.dismiss();
         }
     }
 

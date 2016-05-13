@@ -1,5 +1,6 @@
 package com.android.bushelper.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,6 +55,10 @@ public class TicketFragment extends Fragment {
         imm.hideSoftInputFromWindow(ticketFromET.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(ticketToET.getWindowToken(), 0);
 
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         String fromStr = ticketFromET.getText().toString();
         String toStr = ticketToET.getText().toString();
         if (TextUtils.isEmpty(fromStr)) {
@@ -71,21 +76,23 @@ public class TicketFragment extends Fragment {
                     Gson gson = new Gson();
                     TicketBean ticketBean = gson.fromJson(result, TicketBean.class);
                     initTicketList(ticketBean);
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
-
+                    Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(CancelledException cex) {
-
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onFinished() {
-
+                    progressDialog.dismiss();
                 }
             });
         }

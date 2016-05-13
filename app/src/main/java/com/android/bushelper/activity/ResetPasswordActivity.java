@@ -1,5 +1,6 @@
 package com.android.bushelper.activity;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -50,6 +51,10 @@ public class ResetPasswordActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(newPwd)) {
             Toast.makeText(this, getResources().getString(R.string.new_password_text_hint), Toast.LENGTH_SHORT).show();
         } else {
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
             SQLiteDatabase db = myDatabaseHelper.getWritableDatabase();
             try {
                 String sql = "SELECT * FROM users WHERE account = ? AND password = ?";
@@ -63,12 +68,15 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     editor.commit();
                     Toast.makeText(this, R.string.reset_password_success, Toast.LENGTH_SHORT).show();
                     finish();
+                    progressDialog.dismiss();
                 } else {
                     Toast.makeText(this, R.string.old_password_error, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
                 cursor.close();
             } catch (Exception ex) {
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         }
     }

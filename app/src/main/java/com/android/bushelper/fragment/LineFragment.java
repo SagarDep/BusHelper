@@ -1,5 +1,6 @@
 package com.android.bushelper.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,6 +54,10 @@ public class LineFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(lineSearchET.getWindowToken(), 0);
 
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         String lineStr = lineSearchET.getText().toString();
         if (TextUtils.isEmpty(lineStr)) {
             Toast.makeText(getActivity(), "请输入线路", Toast.LENGTH_SHORT).show();
@@ -67,21 +72,23 @@ public class LineFragment extends Fragment {
                     Gson gson = new Gson();
                     LineBean lineBean = gson.fromJson(result, LineBean.class);
                     initLineList(lineBean);
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
-
+                    Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(CancelledException cex) {
-
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onFinished() {
-
+                    progressDialog.dismiss();
                 }
             });
         }

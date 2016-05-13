@@ -1,5 +1,6 @@
 package com.android.bushelper.activity;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -60,6 +61,10 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (!repassword.equals(password)) {
             Toast.makeText(this, R.string.re_password_error, Toast.LENGTH_SHORT).show();
         } else {
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
             SQLiteDatabase db = myDatabaseHelper.getWritableDatabase();
             try {
                 String sql = "SELECT * FROM users WHERE account = ?";
@@ -68,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(this, R.string.re_account_exist, Toast.LENGTH_SHORT).show();
                     accountET.setText("");
                     accountET.requestFocus();
+                    progressDialog.dismiss();
                 } else {
                     ContentValues values = new ContentValues();
                     values.put("account", account);
@@ -76,10 +82,12 @@ public class RegisterActivity extends AppCompatActivity {
                     db.insert("users", null, values);
                     Toast.makeText(this, R.string.register_success, Toast.LENGTH_SHORT).show();
                     finish();
+                    progressDialog.dismiss();
                 }
                 cursor.close();
             } catch (Exception ex) {
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.android.bushelper.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,6 +50,10 @@ public class PlatformFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(platformSearchET.getWindowToken(), 0);
 
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
+
         String platformStr = platformSearchET.getText().toString();
         if (TextUtils.isEmpty(platformStr)) {
             Toast.makeText(getActivity(), "请输入站点", Toast.LENGTH_SHORT).show();
@@ -63,21 +68,23 @@ public class PlatformFragment extends Fragment {
                     Gson gson = new Gson();
                     PlatformBean platformBean = gson.fromJson(result, PlatformBean.class);
                     initPlatformList(platformBean);
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
-
+                    Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(CancelledException cex) {
-
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onFinished() {
-
+                    progressDialog.dismiss();
                 }
             });
         }

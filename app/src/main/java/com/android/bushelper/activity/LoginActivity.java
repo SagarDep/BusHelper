@@ -1,5 +1,6 @@
 package com.android.bushelper.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -67,6 +68,10 @@ public class LoginActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, R.string.user_password_hint, Toast.LENGTH_SHORT).show();
         } else {
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading...");
+            progressDialog.show();
+
             SQLiteDatabase db = myDatabaseHelper.getWritableDatabase();
             try {
                 String sql = "SELECT * FROM users WHERE account = ? AND password = ?";
@@ -82,12 +87,15 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
+                    progressDialog.dismiss();
                 } else {
                     Toast.makeText(this, R.string.login_error, Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
                 cursor.close();
             } catch (Exception ex) {
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         }
     }
