@@ -20,5 +20,29 @@
     2. 修改密码 √
     3. 注销登录 √
 
-####PS
+#### PS
 临时罗列这些功能而已-_-
+
+### 截图
+![icon](http://ol3e9fhcz.bkt.clouddn.com/app_icon.png)
+
+![0](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_00.png)
+![1](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_01.png)
+
+![2](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_02.png)
+![3](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_03.png)
+
+![4](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_04.png)
+![5](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_05.png)
+
+![6](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_06.png)
+![7](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_07.png)
+
+![8](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_08.png)
+![9](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_09.png)
+
+![10](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_10.png)
+![11](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_11.png)
+
+![12](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_12.png)
+![13](http://ol3e9fhcz.bkt.clouddn.com/bus_helper_13.png)
